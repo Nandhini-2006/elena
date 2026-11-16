@@ -18,33 +18,33 @@ A decentralized, event-driven file-sharing platform akin to BitTorrent, built en
 ## 2. System Architecture & Component Design
 
 ```mermaid
-graph TD
-    subgraph Tracker Node
-        TS[Tracker Server :6881]
-        TR[Tracker Registry]
+flowchart TD
+    subgraph TrackerNode["Tracker Node"]
+        TS["Tracker Server :6881"]
+        TR["Tracker Registry"]
         TS --> TR
     end
 
-    subgraph Peer A (Seeder)
-        NA[NIO Server / Channel]
-        UMA[Upload Manager]
-        SMA[Storage Manager]
+    subgraph PeerA["Peer A (Seeder)"]
+        NA["NIO Server / Channel"]
+        UMA["Upload Manager"]
+        SMA["Storage Manager"]
         NA --> UMA --> SMA
     end
 
-    subgraph Peer B (Leecher / Seeder)
-        NB[NIO Server / Client]
-        DMB[Download Manager]
-        SMB[Storage Manager]
-        IMB[Integrity Manager]
+    subgraph PeerB["Peer B (Leecher / Seeder)"]
+        NB["NIO Server / Client"]
+        DMB["Download Manager"]
+        SMB["Storage Manager"]
+        IMB["Integrity Manager"]
         NB --> DMB
         DMB --> IMB --> SMB
     end
 
-    subgraph Peer C (Leecher)
-        NC[NIO Server / Client]
-        DMC[Download Manager]
-        SMC[Storage Manager]
+    subgraph PeerC["Peer C (Leecher)"]
+        NC["NIO Server / Client"]
+        DMC["Download Manager"]
+        SMC["Storage Manager"]
         NC --> DMC --> SMC
     end
 
